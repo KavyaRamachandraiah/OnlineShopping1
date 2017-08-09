@@ -1,0 +1,22 @@
+List<PurchaseBean> b=preparebeanlist(purchaseservice.listPurchase());
+		List<ItemBean> a=prepareListBean(itemservice.listitem());
+		PurchaseBean b1=null;
+		List<PurchaseBean> p=new ArrayList<PurchaseBean>();
+		if(a!=null && !(a.isEmpty())){
+			if(b!=null && !(b.isEmpty())){
+				Iterator i=b.iterator();
+				while(i.hasNext()){
+					b1=(PurchaseBean)i.next();
+					
+					if(b1.getCid().equals(session.getAttribute("custid"))){
+						System.out.println("iminside if");
+						p.add(b1);
+						
+					}
+				}
+			}
+		}
+		Map model=new HashMap();
+		model.put("purchaselist", p);
+		
+		return new ModelAndView("cartlist",model);
